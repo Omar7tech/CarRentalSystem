@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Sluggable\Attributes\Sluggable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 
 #[Guarded(['id'])]
 
-class Brand extends Model
+class Brand extends Model 
 {
     /** @use HasFactory<\Database\Factories\BrandFactory> */
     use HasFactory, HasSlug;
