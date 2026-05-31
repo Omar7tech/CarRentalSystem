@@ -14,6 +14,7 @@ class BrandForm
         return $schema
             ->components([
                 Section::make('Brand Information')
+                    ->compact()
                     ->description('Manage brand details')
                     ->schema([
                         TextInput::make('name')
@@ -21,6 +22,7 @@ class BrandForm
                             ->maxLength(255),
                     ]),
                 Section::make('Visibility Settings')
+                    ->compact()
                     ->description('Control brand display preferences')
                     ->schema([
                         Toggle::make('show_on_website')

@@ -16,12 +16,14 @@ class BrandInfolist
         return $schema
             ->components([
                 Section::make('Brand Details')
+                    ->columnSpanFull()
+                    ->compact()
                     ->schema([
-                        Grid::make(2)
+                        Grid::make(3)
                             ->schema([
                                 ImageEntry::make('logo')
                                     ->imageSize(150)
-                                    ->columnSpanFull(),
+                                    ->columnSpan(1),
                                 TextEntry::make('name')
                                     ->weight('bold')
                                     ->size('lg')

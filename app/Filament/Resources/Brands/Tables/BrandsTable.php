@@ -9,6 +9,7 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class BrandsTable
@@ -18,15 +19,13 @@ class BrandsTable
         return $table
             ->columns([
                 ImageColumn::make('logo')
-                    ->circular()
-                    ->size(50),
+                    ->imageSize(50),
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable()
                     ->weight('medium')
-                    ->description(fn ($record) => $record->slug, position: 'below'),
-                IconColumn::make('show_on_website')
-                    ->boolean()
+                    ->description(fn($record) => $record->slug, position: 'below'),
+                ToggleColumn::make('show_on_website')
                     ->label('Visible on Website'),
             ])
             ->filters([
