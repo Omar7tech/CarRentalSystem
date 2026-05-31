@@ -2,20 +2,18 @@
 
 namespace App\Filament\Resources\Brands;
 
-use App\Filament\Resources\Brands\Pages\ManageBrands;
+use App\Filament\Resources\Brands\Pages\CreateBrand;
+use App\Filament\Resources\Brands\Pages\EditBrand;
+use App\Filament\Resources\Brands\Pages\ListBrands;
+use App\Filament\Resources\Brands\Pages\ViewBrand;
+use App\Filament\Resources\Brands\Schemas\BrandForm;
+use App\Filament\Resources\Brands\Schemas\BrandInfolist;
+use App\Filament\Resources\Brands\Tables\BrandsTable;
 use App\Models\Brand;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class BrandResource extends Resource
@@ -28,55 +26,33 @@ class BrandResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                TextInput::make('name')
-                    ->required(),
-                TextInput::make('slug')
-                    ->required(),
-                Toggle::make('show_on_website')
-                    ->required(),
-            ]);
+        return BrandForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return BrandInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->recordTitleAttribute('name')
-            ->columns([
-                TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
-                IconColumn::make('show_on_website')
-                    ->boolean(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+        return BrandsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ManageBrands::route('/'),
+            'index' => ListBrands::route('/'),
+            'create' => CreateBrand::route('/create'),
+            'view' => ViewBrand::route('/{record}'),
+            'edit' => EditBrand::route('/{record}/edit'),
         ];
     }
 }

@@ -10,7 +10,7 @@ use Spatie\Sluggable\SlugOptions;
 
 #[Guarded(['id'])]
 
-class Brand extends Model 
+class Brand extends Model
 {
     use HasSlug;
 
@@ -28,5 +28,10 @@ class Brand extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function logo(): string
+    {
+        return 'https://www.carlogos.org/car-logos/' . $this->slug . '-logo.png';
     }
 }
