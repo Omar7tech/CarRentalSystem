@@ -25,7 +25,7 @@ use Filament\Tables\Table;
 class CarModelsRelationManager extends RelationManager
 {
     protected static string $relationship = 'carModels';
-
+    protected static ?string $recordTitleAttribute = 'name';
     public function isReadOnly(): bool
     {
         return false;
@@ -35,11 +35,11 @@ class CarModelsRelationManager extends RelationManager
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
-                TextInput::make('slug')
-                    ->required(),
+                    ->required()
+                    ->maxLength(255),
                 Toggle::make('show_on_website')
-                    ->required(),
+                    ->label('Show on Website')
+                    ->default(true),
             ]);
     }
 
@@ -47,16 +47,12 @@ class CarModelsRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
-                TextEntry::make('slug'),
+                TextEntry::make('name')
+                    ->weight('bold')
+                    ->size('lg'),
                 IconEntry::make('show_on_website')
-                    ->boolean(),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+                    ->boolean()
+                    ->label('Visible on Website'),
             ]);
     }
 
@@ -68,19 +64,13 @@ class CarModelsRelationManager extends RelationManager
                 ImageColumn::make('brand.logo')
                     ->imageSize(50),
                 TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable()
+                    ->weight('medium')
+                    ->description(fn($record) => $record->slug, position: 'below'),
                 IconColumn::make('show_on_website')
-                    ->boolean(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->boolean()
+                    ->label('Visible on Website'),
             ])
             ->filters([
                 //
@@ -92,7 +82,7 @@ class CarModelsRelationManager extends RelationManager
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
-                
+
                 DeleteAction::make(),
             ])
             ->toolbarActions([
