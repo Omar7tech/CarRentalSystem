@@ -23,7 +23,7 @@ class CarModel extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom(['brand.name', 'name'])
             ->saveSlugsTo('slug');
     }
 
