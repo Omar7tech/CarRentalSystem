@@ -53,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
                         fn(AuthPageConfig $config) => $config
                             ->media(asset('covers/hand-holding-key-driving-car-into-sunset.jpg'))
                             ->mediaPosition(\Caresome\FilamentAuthDesigner\Enums\MediaPosition::Cover)
-->themeToggle()
+                            ->themeToggle()
                     )
             ])
             ->middleware([
