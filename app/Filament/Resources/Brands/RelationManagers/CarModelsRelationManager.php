@@ -26,11 +26,14 @@ class CarModelsRelationManager extends RelationManager
 {
     protected static string $relationship = 'carModels';
 
+    public function isReadOnly(): bool
+    {
+        return false;
+    }
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('slug')
@@ -89,7 +92,7 @@ class CarModelsRelationManager extends RelationManager
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
-                DissociateAction::make(),
+                
                 DeleteAction::make(),
             ])
             ->toolbarActions([

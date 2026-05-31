@@ -43,7 +43,7 @@ class BrandResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CarModelsRelationManager::class
+            'car-models' => CarModelsRelationManager::class,
         ];
     }
 
