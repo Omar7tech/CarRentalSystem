@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use AdriaanZon\FilamentPasskeys\FilamentPasskeysPlugin;
+use AdriaanZon\FilamentPasskeys\PasskeyAuthentication;
 use Caresome\FilamentAuthDesigner\AuthDesignerPlugin;
 use Caresome\FilamentAuthDesigner\Data\AuthPageConfig;
 use Filament\Http\Middleware\Authenticate;
@@ -29,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->profile(isSimple:false)
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
             ->spa()
@@ -55,6 +58,11 @@ class AdminPanelProvider extends PanelProvider
                             ->mediaPosition(\Caresome\FilamentAuthDesigner\Enums\MediaPosition::Cover)
                             ->themeToggle()
                     )
+                ,
+                FilamentPasskeysPlugin::make()->passwordlessLogin()
+            ])
+            ->multiFactorAuthentication([
+                PasskeyAuthentication::make(),
             ])
             ->middleware([
                 EncryptCookies::class,
