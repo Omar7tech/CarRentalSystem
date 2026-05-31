@@ -3,7 +3,10 @@
 namespace App\Filament\Resources\Brands\Schemas;
 
 use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class BrandInfolist
@@ -12,16 +15,23 @@ class BrandInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
-                TextEntry::make('slug'),
-                IconEntry::make('show_on_website')
-                    ->boolean(),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+                Section::make('Brand Details')
+                    ->schema([
+                        Grid::make(2)
+                            ->schema([
+                                ImageEntry::make('logo')
+                                    ->imageSize(150)
+                                    ->columnSpanFull(),
+                                TextEntry::make('name')
+                                    ->weight('bold')
+                                    ->size('lg')
+                                    ->columnSpan(1),
+                                IconEntry::make('show_on_website')
+                                    ->boolean()
+                                    ->label('Visible on Website')
+                                    ->columnSpan(1),
+                            ]),
+                    ]),
             ]);
     }
 }

@@ -17,21 +17,17 @@ class BrandsTable
     {
         return $table
             ->columns([
-                ImageColumn::make('logo'),
+                ImageColumn::make('logo')
+                    ->circular()
+                    ->size(50),
                 TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable()
+                    ->weight('medium')
+                    ->description(fn ($record) => $record->slug, position: 'below'),
                 IconColumn::make('show_on_website')
-                    ->boolean(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->boolean()
+                    ->label('Visible on Website'),
             ])
             ->filters([
                 //
