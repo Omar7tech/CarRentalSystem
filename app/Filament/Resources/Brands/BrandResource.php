@@ -6,6 +6,7 @@ use App\Filament\Resources\Brands\Pages\CreateBrand;
 use App\Filament\Resources\Brands\Pages\EditBrand;
 use App\Filament\Resources\Brands\Pages\ListBrands;
 use App\Filament\Resources\Brands\Pages\ViewBrand;
+use App\Filament\Resources\Brands\RelationManagers\CarModelsRelationManager;
 use App\Filament\Resources\Brands\Schemas\BrandForm;
 use App\Filament\Resources\Brands\Schemas\BrandInfolist;
 use App\Filament\Resources\Brands\Tables\BrandsTable;
@@ -42,7 +43,7 @@ class BrandResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CarModelsRelationManager::class
         ];
     }
 
