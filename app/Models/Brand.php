@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -33,5 +34,10 @@ class Brand extends Model
     public function getLogoAttribute(): string
     {
         return 'https://www.carlogos.org/car-logos/' . $this->slug . '-logo.png';
+    }
+
+    public function carModels(): HasMany
+    {
+        return $this->hasMany(CarModel::class);
     }
 }
