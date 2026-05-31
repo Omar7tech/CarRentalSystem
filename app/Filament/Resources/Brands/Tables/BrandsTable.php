@@ -17,8 +17,7 @@ class BrandsTable
     {
         return $table
             ->columns([
-                ImageColumn::make('logo')
-                ,
+                ImageColumn::make('logo'),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('slug')

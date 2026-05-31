@@ -30,7 +30,7 @@ class Brand extends Model
         return 'slug';
     }
 
-    public function logo(): string
+    public function getLogoAttribute(): string
     {
         return 'https://www.carlogos.org/car-logos/' . $this->slug . '-logo.png';
     }
