@@ -2,6 +2,7 @@
 
 use App\Enums\BodyType;
 use App\Enums\CarStatus;
+use App\Enums\FuelType;
 use App\Enums\OdometerUnit;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -23,7 +24,8 @@ return new class extends Migration {
             $table->string('vin')->unique()->nullable();
             $table->year('year');
             $table->string('color');
-            $table->enum('body_type', BodyType::cases());
+            $table->enum('body_type', BodyType::cases())->default(BodyType::SEDAN->value);
+            $table->enum('fuel_type', FuelType::cases())->default(FuelType::GASOLINE->value);
             $table->enum('status', CarStatus::cases())->default(CarStatus::Available->value);
 
             //Plate
