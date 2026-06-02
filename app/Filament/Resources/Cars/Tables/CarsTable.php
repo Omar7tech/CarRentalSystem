@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Cars\Tables;
 
+use App\Models\Car;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
 
 class CarsTable
@@ -28,12 +30,9 @@ class CarsTable
                     ->badge(),
                 TextColumn::make('status')
                     ->badge(),
-                TextColumn::make('plate_number_type')
-                    ->badge(),
-                TextColumn::make('plate_code')
-                    ->searchable(),
-                TextColumn::make('plate_number')
-                    ->searchable(),
+                ViewColumn::make('plate')
+                    ->label('License Plate')
+                    ->view('components.lebanese-plate'),
                 TextColumn::make('odometer')
                     ->numeric()
                     ->sortable(),
