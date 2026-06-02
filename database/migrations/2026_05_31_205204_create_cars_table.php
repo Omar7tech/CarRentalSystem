@@ -4,6 +4,7 @@ use App\Enums\BodyType;
 use App\Enums\CarStatus;
 use App\Enums\FuelType;
 use App\Enums\OdometerUnit;
+use App\Enums\PlateNumberType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -29,6 +30,7 @@ return new class extends Migration {
             $table->enum('status', CarStatus::cases())->default(CarStatus::Available->value);
 
             //Plate
+            $table->enum('plate_number_type', PlateNumberType::cases())->default(PlateNumberType::WHITE->value);
             $table->string('plate_code', 10);
             $table->string('plate_number');
 
