@@ -18,10 +18,9 @@
     // Arabic labels for plate types
     $typeLabels = [
         'white' => 'خصوصي',   // Private
-        'red' => 'عمومي',      // Public/Rental
-        'green' => 'ايجار', // Rental
+        'red' => 'عمومي',      // Public
+        'green' => 'ايجار',    // Rental
         'yellow' => 'تاجر',    // Dealer
-        'blue' => 'حكومي',     // Government
     ];
 
     $typeLabel = $typeLabels[$type] ?? 'خصوصي';
