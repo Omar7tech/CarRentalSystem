@@ -13,25 +13,21 @@
 .lebanese-plate-white {
     background: #FFFFFF;
     border: 2px solid #A3A3A3;
-    color: #1A1A1A;
 }
 
 .lebanese-plate-red {
     background: #DC2626;
     border: 2px solid #991B1B;
-    color: #FFFFFF;
 }
 
 .lebanese-plate-green {
-    background: #15803D;
+    background: #93C19D;
     border: 2px solid #14532D;
-    color: #FFFFFF;
 }
 
 .lebanese-plate-yellow {
     background: #FACC15;
     border: 2px solid #A16207;
-    color: #1A1A1A;
 }
 
 .lebanese-plate-side {
@@ -82,6 +78,7 @@
     font-weight: 700;
     text-transform: uppercase;
     transform: scaleY(1.1);
+    color: #000000 !important;
 }
 
 .lebanese-plate-number {
@@ -90,4 +87,5 @@
     font-weight: 700;
     letter-spacing: 1.5px;
     transform: scaleY(1.1);
+    color: #000000 !important;
 }
