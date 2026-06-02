@@ -28,7 +28,7 @@ class CarFactory extends Factory
             'fuel_type' => $this->faker->randomElement(\App\Enums\FuelType::cases()),
             'status' => $this->faker->randomElement(\App\Enums\CarStatus::cases()),
             'plate_number_type' => $this->faker->randomElement(\App\Enums\PlateNumberType::cases()),
-            'plate_code' => $plateLetters[array_rand($plateLetters)] . $plateLetters[array_rand($plateLetters)] . $plateLetters[array_rand($plateLetters)],
+            'plate_code' => $plateLetters[array_rand($plateLetters)],
             'plate_number' => $this->faker->numberBetween(100, 9999),
             'odometer' => $this->faker->numberBetween(0, 250000),
             'odometer_unit' => $this->faker->randomElement(\App\Enums\OdometerUnit::cases()),
