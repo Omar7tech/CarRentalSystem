@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             'password' => 'password',
         ]);
 
-        $this->call([BrandSeeder::class]);
+        $this->call([
+            BrandSeeder::class,
+            CarSeeder::class,
+        ]);
     }
 }
