@@ -5,8 +5,6 @@
     $number = $record->plate_number;
 @endphp
 
-@vite('resources/css/lebanese-plate.css')
-
 <div {{ $getExtraAttributeBag()->class(['lebanese-plate', "lebanese-plate-{$type}"]) }}>
     <div class="lebanese-plate-side">
         <span class="lebanese-plate-side-text-top">لبنان</span>

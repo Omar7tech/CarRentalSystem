@@ -9,8 +9,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/css/filament/admin/theme.css',
-                'resources/css/lebanese-plate.css'
+                'resources/css/filament/admin/theme.css'
             ],
             refresh: true,
             fonts: [

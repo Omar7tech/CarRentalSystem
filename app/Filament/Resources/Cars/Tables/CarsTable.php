@@ -30,6 +30,7 @@ class CarsTable
                 TextColumn::make('status')
                     ->badge(),
                 LebanesePlateColumn::make('plate')
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->label('License Plate'),
                 TextColumn::make('odometer')
                     ->numeric()
