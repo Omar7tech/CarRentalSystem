@@ -1,8 +1,19 @@
 @php
     $record = $getRecord();
-    $type = $record->plate_number_type->value ?? 'white';
-    $code = $record->plate_code;
-    $number = $record->plate_number;
+
+    if (!$record) {
+        return;
+    }
+
+    $type = $record->plate_number_type?->value ?? 'white';
+    $code = $record->plate_code ?? '';
+    $number = $record->plate_number ?? '';
+
+    // Don't render if missing critical data
+    if (empty($code) && empty($number)) {
+        echo '<span class="text-sm text-gray-400">No plate data</span>';
+        return;
+    }
 @endphp
 
 <div {{ $getExtraAttributeBag()->class(['lebanese-plate', "lebanese-plate-{$type}"]) }}>
