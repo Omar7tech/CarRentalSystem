@@ -14,6 +14,17 @@
         echo '<span class="text-sm text-gray-400">No plate data</span>';
         return;
     }
+
+    // Arabic labels for plate types
+    $typeLabels = [
+        'white' => 'خصوصي',   // Private
+        'red' => 'عمومي',      // Public/Rental
+        'green' => 'ايجار', // Rental
+        'yellow' => 'تاجر',    // Dealer
+        'blue' => 'حكومي',     // Government
+    ];
+
+    $typeLabel = $typeLabels[$type] ?? 'خصوصي';
 @endphp
 
 <div {{ $getExtraAttributeBag()->class(['lebanese-plate', "lebanese-plate-{$type}"]) }}>
@@ -22,7 +33,7 @@
 
         <img src="{{ asset('icons/cedar.png') }}" alt="Cedar" class="lebanese-plate-cedar-img">
 
-        <span class="lebanese-plate-side-text-bottom">LIBAN</span>
+        <span class="lebanese-plate-side-text-bottom">{{ $typeLabel }}</span>
     </div>
 
     <div class="lebanese-plate-content">
