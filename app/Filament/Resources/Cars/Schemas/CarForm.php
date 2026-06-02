@@ -7,8 +7,13 @@ use App\Enums\CarStatus;
 use App\Enums\FuelType;
 use App\Enums\OdometerUnit;
 use App\Enums\PlateNumberType;
+use App\Models\Brand;
+use App\Models\Car;
+use App\Models\CarModel;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 class CarForm
@@ -17,8 +22,30 @@ class CarForm
     {
         return $schema
             ->components([
+                Select::make('brand_id')
+                    ->label('Brand')
+                    ->live()
+                    ->dehydrated(false)
+                    ->options(Brand::pluck('name', 'id'))
+                    ->searchable()
+                    ->preload()
+                    ->afterStateUpdated(function (Set $set) {
+                        $set('car_model_id', null);
+                    })
+                    ->required(),
                 Select::make('car_model_id')
-                    ->relationship('carModel', 'name')
+                    ->label('Model')
+                    ->placeholder(fn (Get $get): string => empty($get('brand_id')) ? 'First select brand' : 'Select a model')
+                    ->options(function (?Car $record, Get $get, Set $set) {
+                        if (!empty($record) && empty($get('brand_id'))) {
+                            $set('brand_id', $record->carModel->brand_id);
+                            $set('car_model_id', $record->car_model_id);
+                        }
+
+                        return CarModel::where('brand_id', $get('brand_id'))->pluck('name', 'id');
+                    })
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 TextInput::make('vin')
                     ->default(null),
