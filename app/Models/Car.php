@@ -38,25 +38,31 @@ class Car extends Model
     protected function formattedOdometer(): Attribute
     {
         return Attribute::make(
-            get: fn () => number_format($this->odometer) . ' ' . $this->odometer_unit->value,
+            get: fn (): ?string => $this->odometer !== null && $this->odometer_unit !== null
+                ? number_format($this->odometer) . ' ' . $this->odometer_unit->value
+                : null,
         );
     }
 
     protected function kilometers(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->odometer_unit === OdometerUnit::KM
-                ? $this->odometer
-                : round($this->odometer * 1.60934, 2),
+            get: fn (): ?float => match (true) {
+                $this->odometer === null || $this->odometer_unit === null => null,
+                $this->odometer_unit === OdometerUnit::KM => (float) $this->odometer,
+                default => round($this->odometer * 1.60934, 2),
+            },
         );
     }
 
     protected function miles(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->odometer_unit === OdometerUnit::MI
-                ? $this->odometer
-                : round($this->odometer / 1.60934, 2),
+            get: fn (): ?float => match (true) {
+                $this->odometer === null || $this->odometer_unit === null => null,
+                $this->odometer_unit === OdometerUnit::MI => (float) $this->odometer,
+                default => round($this->odometer / 1.60934, 2),
+            },
         );
     }
 }
