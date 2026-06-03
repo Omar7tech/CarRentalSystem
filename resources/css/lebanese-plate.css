@@ -8,6 +8,7 @@
     min-width: 200px;
     overflow: hidden;
     user-select: none;
+    margin: 10px 2px !important; 
 }
 
 .lebanese-plate-white {

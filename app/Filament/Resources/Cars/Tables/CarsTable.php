@@ -33,10 +33,13 @@ class CarsTable
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->label('License Plate'),
                 TextColumn::make('odometer')
-                    ->numeric()
+                    ->label('Odometer')
+                    ->description(fn ($record) => $record->odometer_unit?->value === 'km'
+                        ? number_format($record->miles ?? 0, 0) . ' mi'
+                        : number_format($record->kilometers ?? 0, 0) . ' km'
+                    )
+                    ->formatStateUsing(fn ($record) => $record->formatted_odometer)
                     ->sortable(),
-                TextColumn::make('odometer_unit')
-                    ->badge(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

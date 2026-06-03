@@ -29,6 +29,7 @@ class CarForm
                     ->options(Brand::pluck('name', 'id'))
                     ->searchable()
                     ->preload()
+                    
                     ->afterStateUpdated(function (Set $set) {
                         $set('car_model_id', null);
                     })
